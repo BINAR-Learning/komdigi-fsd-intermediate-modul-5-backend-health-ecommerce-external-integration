@@ -12,6 +12,7 @@ const mongoSanitize = require("mongo-sanitize");
 const morgan = require("morgan");
 
 const connectDB = require("./config/database");
+const authRoutes = require("./routes/authRoutes");
 const externalRoutes = require("./routes/externalRoutes");
 
 const app = express();
@@ -56,6 +57,7 @@ const apiLimiter = rateLimit({
 app.use("/api/", apiLimiter);
 
 // Routes
+app.use("/api/auth", authRoutes);
 app.use("/api/external", externalRoutes);
 
 // Health check
@@ -93,6 +95,9 @@ app.listen(PORT, () => {
   ╔══════════════════════════════════════════════════╗
   ║  🌐 Health E-Commerce API (Modul 5)              ║
   ║  🏥 Port: ${PORT}                                    ║
+  ║  🔐 Auth: POST /api/auth/register               ║
+  ║  🔐 Auth: POST /api/auth/login                  ║
+  ║  🔐 Auth: GET /api/auth/profile                 ║
   ║  🤖 AI Chatbot: POST /api/external/ai/ask        ║
   ║  🏥 Kemenkes: GET /api/external/kemenkes/meds    ║
   ║  💳 Payment: POST /api/external/payment/create   ║

@@ -12,6 +12,10 @@ const mongoSanitize = require("mongo-sanitize");
 const morgan = require("morgan");
 
 const connectDB = require("./config/database");
+
+// Import ALL routes (from Modul 3, 4, 5)
+const productRoutes = require("./routes/productRoutes");
+const authRoutes = require("./routes/authRoutes");
 const externalRoutes = require("./routes/externalRoutes");
 
 const app = express();
@@ -55,8 +59,10 @@ const apiLimiter = rateLimit({
 });
 app.use("/api/", apiLimiter);
 
-// Routes
-app.use("/api/external", externalRoutes);
+// Mount Routes (Complete API from Modul 1-5)
+app.use("/api/products", productRoutes);     // From Modul 3 (CRUD)
+app.use("/api/auth", authRoutes);            // From Modul 4 (Authentication)
+app.use("/api/external", externalRoutes);    // From Modul 5 (Integrations)
 
 // Health check
 app.get("/health", (req, res) => {
@@ -86,16 +92,30 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Start
-const PORT = process.env.PORT || 3000;
+// Start Server
+const PORT = process.env.PORT || 5000;  // Port 5000 for Frontend integration!
 app.listen(PORT, () => {
   console.log(`
-  ╔══════════════════════════════════════════════════╗
-  ║  🌐 Health E-Commerce API (Modul 5)              ║
-  ║  🏥 Port: ${PORT}                                    ║
-  ║  🤖 AI Chatbot: POST /api/external/ai/ask        ║
-  ║  🏥 Kemenkes: GET /api/external/kemenkes/meds    ║
-  ║  💳 Payment: POST /api/external/payment/create   ║
-  ╚══════════════════════════════════════════════════╝
+  ╔═══════════════════════════════════════════════════════════════╗
+  ║  🏥 HEALTH E-COMMERCE API - ULTIMATE BACKEND                  ║
+  ║  📍 Port: ${PORT}                                                  ║
+  ║                                                               ║
+  ║  📦 Products API (Modul 3):                                   ║
+  ║     GET    /api/products                                      ║
+  ║     POST   /api/products (Admin)                              ║
+  ║                                                               ║
+  ║  🔐 Authentication (Modul 4):                                 ║
+  ║     POST   /api/auth/register                                 ║
+  ║     POST   /api/auth/login                                    ║
+  ║     GET    /api/auth/profile                                  ║
+  ║                                                               ║
+  ║  🤖 AI & Integrations (Modul 5):                              ║
+  ║     POST   /api/external/ai/ask                               ║
+  ║     GET    /api/external/kemenkes/medications                 ║
+  ║     POST   /api/external/payment/create                       ║
+  ║                                                               ║
+  ║  ✅ READY FOR FRONTEND INTEGRATION!                           ║
+  ╚═══════════════════════════════════════════════════════════════╝
   `);
+  console.log(`\n🔗 Frontend should connect to: http://localhost:${PORT}\n`);
 });

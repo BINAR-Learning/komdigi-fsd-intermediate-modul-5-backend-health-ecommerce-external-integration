@@ -18,6 +18,7 @@
 Repository ini adalah **ULTIMATE BACKEND** - kombinasi lengkap dari **SEMUA Backend Modul 1-5**!
 
 **🌟 INI ADALAH THE BACKEND yang akan digunakan untuk:**
+
 - ✅ **Frontend Modul 1-3** - React, Next.js, UI/UX
 - ✅ **Common Modul 1-2** - Testing, GitHub Workflow
 - ✅ **Final Project** - Complete MERN integration
@@ -25,22 +26,26 @@ Repository ini adalah **ULTIMATE BACKEND** - kombinasi lengkap dari **SEMUA Back
 **Complete API Features (dari 5 Backend Modules):**
 
 ### From Modul 1-2: Database Layer
+
 - ✅ **Product Model** - Complete dengan validations
 - ✅ **User Model** - Dengan bcrypt hashing
 - ✅ **MongoDB Integration** - Ready to use
 
 ### From Modul 3: REST API
+
 - ✅ **CRUD Products** - GET, POST, PUT, DELETE dengan filtering & search
 - ✅ **Middleware System** - CORS, logging, error handling
 - ✅ **Query Support** - Filter by category, price range, search
 
 ### From Modul 4: Security
+
 - ✅ **JWT Authentication** - Register, login, protected routes
 - ✅ **RBAC** - Admin vs User role-based access
 - ✅ **Password Hashing** - Bcrypt dengan salt rounds 10
 - ✅ **Security Headers** - Helmet, rate limiting, sanitization
 
-### From Modul 5: External Integrations  
+### From Modul 5: External Integrations
+
 - ✅ **AI Chatbot** - Google Gemini untuk health recommendations (with caching!)
 - ✅ **Kemenkes API** - Official government health data
 - ✅ **Midtrans Payment** - Payment gateway dengan webhook handling
@@ -86,7 +91,92 @@ mongosh
 
 **Database akan auto-create saat server pertama kali running.**
 
-### Step 4: Setup Environment Variables
+### Step 4: Seed Database (Populate Sample Data)
+
+**Sebelum testing API, isi database dengan sample data untuk testing:**
+
+```bash
+# Jalankan seeder untuk membuat products dan users
+npm run seed
+```
+
+**Seeder akan membuat:**
+
+- ✅ **37 Products** - Lengkap dengan berbagai kategori:
+
+  - 9 Vitamins (Vitamin C, D3, B Complex, Multivitamin, dll)
+  - 8 Supplements (Omega-3, Probiotik, Collagen, Magnesium, dll)
+  - 8 Medicines (Paracetamol, Amoxicillin, Ibuprofen, dll)
+  - 10 Medical Equipment (Thermometer, BP Monitor, Nebulizer, dll)
+
+- ✅ **17 Users** - Siap untuk login testing:
+  - **2 Admin Users**:
+    - `aiman@example.com` / `Aiman123!`
+    - `admin@healthstore.com` / `Admin123!`
+  - **15 Regular Users**:
+    - `aila@example.com` / `Aila123!`
+    - `user@example.com` / `User123!`
+    - `budi@example.com` / `Budi123!`
+    - `siti@example.com` / `Siti123!`
+    - `andi@example.com` / `Andi123!`
+    - `rina@example.com` / `Rina123!`
+    - `dedi@example.com` / `Dedi123!`
+    - `lisa@example.com` / `Lisa123!`
+    - `fajar@example.com` / `Fajar123!`
+    - `maya@example.com` / `Maya123!`
+    - `eko@example.com` / `Eko123!`
+    - `indah@example.com` / `Indah123!`
+    - `hadi@example.com` / `Hadi123!`
+    - `citra@example.com` / `Citra123!`
+    - ... dan lainnya
+
+**Expected Output:**
+
+```
+🗑️  Clearing old data...
+✅ Old data cleared
+
+📦 Creating products...
+✅ 37 products created
+
+👥 Creating users...
+✅ 17 users created
+
+📋 Test Users for Login:
+
+   🔐 ADMIN USERS:
+   - Aiman (aiman@example.com) / Aiman123!
+   - Admin Health (admin@healthstore.com) / Admin123!
+
+   👤 REGULAR USERS:
+   - Aila (aila@example.com) / Aila123!
+   - User Test (user@example.com) / User123!
+   ... and 13 more users
+
+📊 Summary:
+   ✅ 37 products created
+   ✅ 17 users created
+      - 2 admin users
+      - 15 regular users
+
+🎉 Database seeding complete!
+```
+
+**💡 Tips:**
+
+- Seeder akan **clear existing data** terlebih dahulu
+- Password sudah di-hash dengan bcrypt (aman)
+- Semua users memiliki phone dan address lengkap
+- Gunakan kredensial ini untuk testing login/authentication
+
+**Alternatif Seeder:**
+
+```bash
+# Seed hanya vitamins saja (tanpa clear data)
+npm run seed:vitamins
+```
+
+### Step 5: Setup Environment Variables
 
 ```bash
 # Copy file .env.example jadi .env
@@ -149,7 +239,7 @@ SMTP_PASS=your-app-password
 4. Copy Server Key & Client Key
 5. Paste to `.env`
 
-### Step 5: Start Server
+### Step 6: Start Server
 
 ```bash
 # Jalankan server dalam development mode
@@ -184,12 +274,17 @@ curl http://localhost:3000/health
 **2. Get JWT Token (Login):**
 
 ```bash
-# Assuming you have user from Modul 4
+# Login dengan user dari seeder
 curl -X POST http://localhost:3000/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"Test123!"}'
+  -d '{"email":"aila@example.com","password":"Aila123!"}'
 
-# Save the token!
+# Atau login sebagai admin
+curl -X POST http://localhost:3000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"aiman@example.com","password":"Aiman123!"}'
+
+# Save the token yang dikembalikan!
 ```
 
 **3. Test AI Chatbot:**

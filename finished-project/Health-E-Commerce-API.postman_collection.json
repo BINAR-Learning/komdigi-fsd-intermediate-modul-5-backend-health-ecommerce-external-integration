@@ -1,0 +1,663 @@
+{
+	"info": {
+		"_postman_id": "health-ecommerce-api-v1",
+		"name": "Health E-Commerce API - Complete Collection",
+		"description": "Complete API collection untuk Health E-Commerce dengan Authentication, Products, AI Chatbot, Kemenkes Integration, dan Midtrans Payment Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "health-ecommerce"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Register User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.token) {",
+									"        pm.environment.set(\"authToken\", jsonData.token);",
+									"        pm.environment.set(\"userId\", jsonData.user.id);",
+									"        pm.environment.set(\"userEmail\", jsonData.user.email);",
+									"        pm.environment.set(\"userRole\", jsonData.user.role);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"user\",\n  \"phone\": \"081234567890\",\n  \"address\": \"Jl. Merdeka No. 123, Jakarta\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register user baru. Token JWT akan otomatis disimpan di environment variable `authToken` setelah register berhasil."
+					},
+					"response": []
+				},
+				{
+					"name": "Register Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.token) {",
+									"        pm.environment.set(\"adminToken\", jsonData.token);",
+									"        pm.environment.set(\"adminId\", jsonData.user.id);",
+									"        pm.environment.set(\"adminEmail\", jsonData.user.email);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Admin User\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"Admin123!\",\n  \"role\": \"admin\",\n  \"phone\": \"081987654321\",\n  \"address\": \"Jl. Admin No. 1, Jakarta\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/register",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						},
+						"description": "Register user dengan role admin. Token akan disimpan di `adminToken`."
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 200) {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.token) {",
+									"        pm.environment.set(\"authToken\", jsonData.token);",
+									"        pm.environment.set(\"userId\", jsonData.user.id);",
+									"        pm.environment.set(\"userEmail\", jsonData.user.email);",
+									"        pm.environment.set(\"userRole\", jsonData.user.role);",
+									"        ",
+									"        if (jsonData.user.role === 'admin') {",
+									"            pm.environment.set(\"adminToken\", jsonData.token);",
+									"        }",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"{{userEmail}}\",\n  \"password\": \"Password123!\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						},
+						"description": "Login user dan dapatkan JWT token. Token akan otomatis disimpan di environment variable."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/profile",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"profile"
+							]
+						},
+						"description": "Get profil user yang sedang login. Memerlukan JWT token (Bearer Token)."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints untuk authentication dan authorization"
+		},
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get All Products",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products?category=Vitamin&minPrice=0&maxPrice=100000&search=vitamin",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Vitamin",
+									"description": "Filter by category: Vitamin, Supplement, Medical Equipment, Medicine, Other",
+									"disabled": true
+								},
+								{
+									"key": "minPrice",
+									"value": "0",
+									"description": "Minimum price filter",
+									"disabled": true
+								},
+								{
+									"key": "maxPrice",
+									"value": "100000",
+									"description": "Maximum price filter",
+									"disabled": true
+								},
+								{
+									"key": "search",
+									"value": "vitamin",
+									"description": "Search by product name or description",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Get semua produk dengan optional filtering. Tidak memerlukan authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "69058b83cc8332efdabe01e2",
+									"description": "Product ID"
+								}
+							]
+						},
+						"description": "Get produk berdasarkan ID. Tidak memerlukan authentication."
+					},
+					"response": []
+				},
+				{
+					"name": "Create Product (Admin Only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Vitamin C 1000mg\",\n  \"category\": \"Vitamin\",\n  \"price\": 85000,\n  \"stock\": 50,\n  \"description\": \"Suplemen vitamin C untuk meningkatkan daya tahan tubuh\",\n  \"manufacturer\": \"PT Sehat Sejahtera\",\n  \"kemenkesId\": \"KEM-123456\",\n  \"isActive\": true\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products"
+							]
+						},
+						"description": "Create produk baru. **Hanya Admin** yang bisa membuat produk. Memerlukan Bearer Token dengan role admin.\n\n**Required fields:** name, category, price, stock\n\n**Category options:** Vitamin, Supplement, Medical Equipment, Medicine, Other"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Product (Admin Only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"name\": \"Vitamin C 1000mg Updated\",\n  \"price\": 90000,\n  \"stock\": 60,\n  \"description\": \"Updated description\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/products/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "69058b83cc8332efdabe01e2",
+									"description": "Product ID"
+								}
+							]
+						},
+						"description": "Update produk. **Hanya Admin** yang bisa update produk. Semua field optional (partial update)."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product (Admin Only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/products/:id",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"products",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "69058b83cc8332efdabe01e2",
+									"description": "Product ID"
+								}
+							]
+						},
+						"description": "Delete produk. **Hanya Admin** yang bisa menghapus produk."
+					},
+					"response": []
+				}
+			],
+			"description": "Endpoints untuk product management"
+		},
+		{
+			"name": "AI Chatbot",
+			"item": [
+				{
+					"name": "Ask AI",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"question\": \"Vitamin apa yang bagus untuk imun tubuh?\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/external/ai/ask",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"external",
+								"ai",
+								"ask"
+							]
+						},
+						"description": "Tanya AI chatbot untuk rekomendasi kesehatan. Rate limited: 10 requests per 15 minutes. Tidak memerlukan authentication.\n\n**Note:** Question maksimal 500 karakter."
+					},
+					"response": []
+				}
+			],
+			"description": "AI chatbot untuk health recommendations"
+		},
+		{
+			"name": "Kemenkes Integration",
+			"item": [
+				{
+					"name": "Search Medications",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/external/kemenkes/medications?search=paracetamol&limit=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"external",
+								"kemenkes",
+								"medications"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "paracetamol",
+									"description": "Search term for medication name",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "Maximum number of results (default: 10)",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Search obat dari Kemenkes API. Memerlukan Bearer Token (bisa user atau admin)."
+					},
+					"response": []
+				},
+				{
+					"name": "Sync Kemenkes to Database (Admin Only)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{adminToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/external/kemenkes/sync",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"external",
+								"kemenkes",
+								"sync"
+							]
+						},
+						"description": "Sync data obat dari Kemenkes API ke database lokal. **Hanya Admin** yang bisa melakukan sync ini. Tidak memerlukan request body."
+					},
+					"response": []
+				}
+			],
+			"description": "Kemenkes API integration endpoints"
+		},
+		{
+			"name": "Payment (Midtrans)",
+			"item": [
+				{
+					"name": "Create Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"orderId\": \"ORDER-{{$timestamp}}\",\n  \"customerEmail\": \"{{userEmail}}\",\n  \"customerName\": \"John Doe\",\n  \"amount\": 170000,\n  \"items\": [\n    {\n      \"id\": \"69058b83cc8332efdabe01e2\",\n      \"name\": \"Vitamin C 1000mg\",\n      \"price\": 85000,\n      \"quantity\": 2\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/external/payment/create",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"external",
+								"payment",
+								"create"
+							]
+						},
+						"description": "Create payment transaction via Midtrans. Memerlukan Bearer Token.\n\n**Required fields:**\n- orderId: Unique order identifier\n- customerEmail: Customer email\n- customerName: Customer name\n- amount: Total amount (harus sesuai dengan total items)\n- items: Array of items dengan id, name, price, quantity"
+					},
+					"response": []
+				},
+				{
+					"name": "Payment Webhook",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"transaction_status\": \"settlement\",\n  \"order_id\": \"ORDER-1234567890\",\n  \"gross_amount\": \"170000\",\n  \"status_code\": \"200\",\n  \"signature_key\": \"abc123...\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/external/payment/webhook",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"external",
+								"payment",
+								"webhook"
+							]
+						},
+						"description": "Webhook endpoint untuk Midtrans payment notifications. Dipanggil otomatis oleh Midtrans ketika status pembayaran berubah. Tidak memerlukan authentication."
+					},
+					"response": []
+				}
+			],
+			"description": "Midtrans payment gateway integration"
+		},
+		{
+			"name": "Health Check",
+			"item": [
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/health",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"health"
+							]
+						},
+						"description": "Check API health status. Tidak memerlukan authentication."
+					},
+					"response": []
+				}
+			],
+			"description": "Health check endpoint"
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "authToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "adminToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "userEmail",
+			"value": "john.doe@example.com",
+			"type": "string"
+		},
+		{
+			"key": "userRole",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

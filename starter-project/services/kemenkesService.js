@@ -21,7 +21,7 @@ class KemenkesService {
     this.apiKey = process.env.KEMENKES_API_KEY;
 
     if (!this.apiKey) {
-      console.warn("⚠️  KEMENKES_API_KEY not set");
+      console.warn("  KEMENKES_API_KEY not set");
     }
   }
 
@@ -51,10 +51,10 @@ class KemenkesService {
 
       return {
         success: false,
-        message: "⚠️  TODO: Implement Kemenkes API integration",
+        message: "  TODO: Implement Kemenkes API integration",
       };
     } catch (error) {
-      console.error("❌ Kemenkes API Error:", error.message);
+      console.error(" Kemenkes API Error:", error.message);
 
       return {
         success: false,
@@ -86,7 +86,7 @@ class KemenkesService {
 
   async syncToDatabase() {
     try {
-      console.log("🔄 Starting Kemenkes sync...");
+      console.log(" Starting Kemenkes sync...");
 
       // TODO: Fetch medications
       // const result = await this.getMedications('', 50);
@@ -97,10 +97,10 @@ class KemenkesService {
 
       return {
         success: false,
-        message: "⚠️  TODO: Implement database sync",
+        message: "  TODO: Implement database sync",
       };
     } catch (error) {
-      console.error("❌ Sync Error:", error.message);
+      console.error(" Sync Error:", error.message);
 
       return {
         success: false,

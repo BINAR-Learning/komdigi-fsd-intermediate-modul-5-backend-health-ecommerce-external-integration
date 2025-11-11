@@ -1,6 +1,6 @@
 /**
  * External Services Routes
- * 
+ *
  * TODO untuk peserta:
  * 1. Import controllers dan services
  * 2. Setup rate limiting untuk AI endpoint
@@ -13,7 +13,7 @@
  *    - POST /payment/webhook (Handle Midtrans callback)
  */
 
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 
 // TODO: Import controllers
@@ -45,11 +45,11 @@ const router = express.Router();
 // TODO: POST /ai/ask - Ask AI for health recommendations
 // router.post('/ai/ask', authenticateToken, aiLimiter, aiController.askAI);
 
-router.post('/ai/ask', (req, res) => {
+router.post("/ai/ask", (req, res) => {
   res.json({
     success: false,
-    message: '⚠️  TODO: Implement AI endpoint',
-    hint: 'Uncomment route dan implement aiController.askAI'
+    message: "  TODO: Implement AI endpoint",
+    hint: "Uncomment route dan implement aiController.askAI",
   });
 });
 
@@ -71,17 +71,17 @@ router.post('/ai/ask', (req, res) => {
 //   }
 // });
 
-router.get('/kemenkes/medications', (req, res) => {
+router.get("/kemenkes/medications", (req, res) => {
   res.json({
     success: false,
-    message: '⚠️  TODO: Implement Kemenkes endpoint'
+    message: "  TODO: Implement Kemenkes endpoint",
   });
 });
 
 // TODO: POST /kemenkes/sync - Sync Kemenkes data to database (Admin only)
-// router.post('/kemenkes/sync', 
-//   authenticateToken, 
-//   authorizeRole('admin'), 
+// router.post('/kemenkes/sync',
+//   authenticateToken,
+//   authorizeRole('admin'),
 //   async (req, res) => {
 //     try {
 //       const result = await kemenkesService.syncToDatabase();
@@ -95,10 +95,10 @@ router.get('/kemenkes/medications', (req, res) => {
 //   }
 // );
 
-router.post('/kemenkes/sync', (req, res) => {
+router.post("/kemenkes/sync", (req, res) => {
   res.json({
     success: false,
-    message: '⚠️  TODO: Implement sync endpoint'
+    message: "  TODO: Implement sync endpoint",
   });
 });
 
@@ -110,15 +110,15 @@ router.post('/kemenkes/sync', (req, res) => {
 // router.post('/payment/create', authenticateToken, async (req, res) => {
 //   try {
 //     const { items } = req.body;
-//     
+//
 //     // Calculate total amount
-//     const amount = items.reduce((sum, item) => 
+//     const amount = items.reduce((sum, item) =>
 //       sum + (item.price * item.quantity), 0
 //     );
-//     
+//
 //     // Generate unique order ID
 //     const orderId = `ORDER-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-//     
+//
 //     // Create payment
 //     const result = await midtransService.createTransaction({
 //       orderId,
@@ -128,7 +128,7 @@ router.post('/kemenkes/sync', (req, res) => {
 //       customerPhone: req.user.phone || '08123456789',
 //       items
 //     });
-//     
+//
 //     res.json(result);
 //   } catch (error) {
 //     res.status(500).json({
@@ -138,10 +138,10 @@ router.post('/kemenkes/sync', (req, res) => {
 //   }
 // });
 
-router.post('/payment/create', (req, res) => {
+router.post("/payment/create", (req, res) => {
   res.json({
     success: false,
-    message: '⚠️  TODO: Implement payment endpoint'
+    message: "  TODO: Implement payment endpoint",
   });
 });
 
@@ -150,7 +150,7 @@ router.post('/payment/create', (req, res) => {
 //   try {
 //     const notification = req.body;
 //     const result = midtransService.handleNotification(notification);
-//     
+//
 //     // Always return 200 to Midtrans
 //     res.json(result);
 //   } catch (error) {
@@ -161,12 +161,11 @@ router.post('/payment/create', (req, res) => {
 //   }
 // });
 
-router.post('/payment/webhook', (req, res) => {
+router.post("/payment/webhook", (req, res) => {
   res.json({
     success: false,
-    message: '⚠️  TODO: Implement webhook handler'
+    message: "  TODO: Implement webhook handler",
   });
 });
 
 module.exports = router;
-

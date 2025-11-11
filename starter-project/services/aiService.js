@@ -1,12 +1,12 @@
 /**
- * ⚠️ FILE INI PERLU DILENGKAPI
+ *  FILE INI PERLU DILENGKAPI
  *
  * AI Service - Google Gemini Integration
  * Health E-Commerce AI Chatbot
  *
  * Tugas:
  * Implement AI chatbot yang kasih rekomendasi produk kesehatan
- * 
+ *
  * CATATAN PENTING:
  * - Gunakan @google/generative-ai SDK (BUKAN axios langsung)
  * - Model default: "gemini-2.5-flash" (model yang tersedia untuk API key gratis)
@@ -27,7 +27,7 @@ class AIService {
     this.CACHE_TTL = 60 * 60 * 1000; // 1 jam
 
     if (!this.apiKey) {
-      console.warn('⚠️  GOOGLE_AI_API_KEY not set. AI features will not work.');
+      console.warn('  GOOGLE_AI_API_KEY not set. AI features will not work.');
       this.genAI = null;
     } else {
       // Initialize Google Generative AI SDK

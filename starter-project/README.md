@@ -1,4 +1,4 @@
-# 📝 Health E-Commerce: Backend Starter Project
+# Health E-Commerce: Backend Starter Project
 
 > **Starter Template untuk Practice - Build dari Scratch!**
 
@@ -10,64 +10,66 @@
 
 ---
 
-## 🎯 Tujuan Starter Project
+## Tujuan Starter Project
 
 **Ini adalah template untuk practice!**
 
-- ✅ Basic structure sudah ada
-- ✅ TODO comments untuk guidance
-- ✅ Example code snippets
-- ✅ Step-by-step instructions
-- ⚠️ **Implementasi belum lengkap** - Kamu yang akan build!
+- Basic structure sudah ada
+- TODO comments untuk guidance
+- Example code snippets
+- Step-by-step instructions
+- **Implementasi belum lengkap** - Kamu yang akan build!
 
 **Gunakan finished-project sebagai reference:**
+
 - `../finished-project/` - Complete implementation
 - Lihat finished untuk best practices
 - Copy code jika stuck
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 starter-project/
-├── README.md                    # 📖 Dokumentasi ini
+├── README.md                    #  Dokumentasi ini
 ├── package.json                 # Dependencies (sudah ada)
-├── server.js                    # ⚠️ TODO: Setup server
+├── server.js                    #  TODO: Setup server
 │
 ├── config/
-│   ├── database.js             # ⚠️ TODO: MongoDB connection
-│   └── cloudinary.js          # ⚠️ TODO: Cloudinary configuration
+│   ├── database.js             #  TODO: MongoDB connection
+│   └── cloudinary.js          #  TODO: Cloudinary configuration
 │
 ├── controllers/
-│   ├── aiController.js         # ⚠️ TODO: AI controller
-│   └── uploadController.js     # ⚠️ TODO: Image upload controller
+│   ├── aiController.js         #  TODO: AI controller
+│   └── uploadController.js     #  TODO: Image upload controller
 │
 ├── middleware/
-│   ├── auth.js                 # ⚠️ TODO: JWT authentication
-│   └── authorize.js           # ⚠️ TODO: RBAC authorization
+│   ├── auth.js                 #  TODO: JWT authentication
+│   └── authorize.js           #  TODO: RBAC authorization
 │
 ├── models/
-│   ├── Product.js              # ✅ Basic schema (expand jika perlu)
-│   └── User.js                 # ✅ Basic schema (expand jika perlu)
+│   ├── Product.js              #  Basic schema (expand jika perlu)
+│   └── User.js                 #  Basic schema (expand jika perlu)
 │
 ├── routes/
-│   ├── externalRoutes.js       # ⚠️ TODO: External API routes
-│   └── uploadRoutes.js        # ⚠️ TODO: Image upload routes
+│   ├── externalRoutes.js       #  TODO: External API routes
+│   └── uploadRoutes.js        #  TODO: Image upload routes
 │
 └── services/
-    ├── aiService.js            # ⚠️ TODO: Google Gemini integration
-    ├── kemenkesService.js      # ⚠️ TODO: Kemenkes API integration
-    └── midtransService.js     # ⚠️ TODO: Midtrans payment integration
+    ├── aiService.js            #  TODO: Google Gemini integration
+    ├── kemenkesService.js      #  TODO: Kemenkes API integration
+    └── midtransService.js     #  TODO: Midtrans payment integration
 ```
 
 **Legend:**
-- ✅ = Sudah ada (basic structure)
-- ⚠️ = Perlu diimplementasikan (TODO)
+
+- = Sudah ada (basic structure)
+- = Perlu diimplementasikan (TODO)
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Step 1: Install Dependencies
 
@@ -127,11 +129,12 @@ npm run dev
 
 ---
 
-## 📋 TODO Checklist
+## TODO Checklist
 
 ### Phase 1: Basic Setup
 
 - [ ] **Setup Server (`server.js`)**
+
   - [ ] Import & configure Express
   - [ ] Setup middleware (helmet, cors, morgan)
   - [ ] Connect to MongoDB
@@ -146,6 +149,7 @@ npm run dev
 ### Phase 2: Authentication
 
 - [ ] **JWT Middleware (`middleware/auth.js`)**
+
   - [ ] Verify JWT token
   - [ ] Extract user from token
   - [ ] Handle invalid tokens
@@ -157,12 +161,14 @@ npm run dev
 ### Phase 3: External Integrations
 
 - [ ] **AI Service (`services/aiService.js`)**
+
   - [ ] Setup Google Gemini client
   - [ ] Create health recommendation function
   - [ ] Parse AI response
   - [ ] Extract product recommendations
 
 - [ ] **Kemenkes Service (`services/kemenkesService.js`)**
+
   - [ ] Fetch medications from Kemenkes API
   - [ ] Transform FHIR data
   - [ ] Handle errors
@@ -176,6 +182,7 @@ npm run dev
 ### Phase 4: Routes
 
 - [ ] **External Routes (`routes/externalRoutes.js`)**
+
   - [ ] POST /ai/ask - AI chatbot
   - [ ] GET /kemenkes/medications - Kemenkes data
   - [ ] POST /kemenkes/sync - Sync to DB (Admin)
@@ -190,12 +197,14 @@ npm run dev
 ### Phase 5: Image Upload (Cloudinary)
 
 - [ ] **Cloudinary Config (`config/cloudinary.js`)**
+
   - [ ] Install cloudinary package
   - [ ] Configure with environment variables
   - [ ] Validate configuration
   - [ ] Export cloudinary instance
 
 - [ ] **Upload Routes (`routes/uploadRoutes.js`)**
+
   - [ ] Setup multer with CloudinaryStorage
   - [ ] Create product image storage (800x800px)
   - [ ] Create profile photo storage (400x400px)
@@ -211,7 +220,7 @@ npm run dev
 
 ---
 
-## 🎓 Learning Path
+## Learning Path
 
 ### Step 1: Read the Code
 
@@ -241,6 +250,7 @@ npm run dev
 ### Step 5: Implement Image Upload
 
 1. **Setup Cloudinary:**
+
    - Install: `npm install cloudinary multer multer-storage-cloudinary`
    - Get free account: https://cloudinary.com/
    - Add credentials to `.env`:
@@ -252,11 +262,13 @@ npm run dev
    - Configure `config/cloudinary.js`
 
 2. **Implement Upload Routes:**
+
    - Setup multer with CloudinaryStorage
    - Create routes for product and profile upload
    - Add authentication middleware
 
 3. **Implement Upload Controller:**
+
    - Handle file uploads
    - Update user profile photo
    - Delete images from Cloudinary
@@ -274,7 +286,7 @@ npm run dev
 
 ---
 
-## 💡 Tips & Tricks
+## Tips & Tricks
 
 ### 1. Use Finished Project as Reference
 
@@ -302,7 +314,7 @@ cd ../finished-project
 ### 4. Use Console Logs
 
 ```javascript
-console.log('Debug:', data);
+console.log("Debug:", data);
 // Helpful untuk debugging
 ```
 
@@ -314,61 +326,68 @@ console.log('Debug:', data);
 
 ---
 
-## 🐛 Common Issues
+## Common Issues
 
-### ❌ "Cannot find module"
+### "Cannot find module"
 
 **Solution:**
+
 ```bash
 npm install
 ```
 
-### ❌ "MongoDB connection failed"
+### "MongoDB connection failed"
 
 **Solution:**
+
 ```bash
 # Start MongoDB
 mongosh
 ```
 
-### ❌ "JWT_SECRET not set"
+### "JWT_SECRET not set"
 
 **Solution:**
+
 ```bash
 # Add to .env
 JWT_SECRET=your-secret-key
 ```
 
-### ❌ "API key invalid"
+### "API key invalid"
 
 **Solution:**
+
 - Check API key di `.env`
 - Verify key is correct
 - Check API key permissions
 
 ---
 
-## 📚 Resources
+## Resources
 
 ### Documentation
+
 - **Finished Project:** `../finished-project/README.md`
 - **Express Docs:** https://expressjs.com/
 - **MongoDB Docs:** https://docs.mongodb.com/
 - **JWT Docs:** https://jwt.io/
 
 ### API Documentation
+
 - **Google Gemini:** https://ai.google.dev/docs
 - **Midtrans:** https://docs.midtrans.com/
 - **Kemenkes:** https://satusehat.kemkes.go.id/platform/docs/
 
 ### Tools
+
 - **Postman** - API testing
 - **MongoDB Compass** - Database GUI
 - **ngrok** - Webhook testing
 
 ---
 
-## ✅ Completion Checklist
+## Completion Checklist
 
 Setelah selesai, pastikan:
 
@@ -384,16 +403,18 @@ Setelah selesai, pastikan:
 
 ---
 
-## 🎉 Next Steps
+## Next Steps
 
 Setelah starter project selesai:
 
 1. **Compare dengan finished-project**
+
    - Lihat perbedaan
    - Pahami best practices
    - Improve code quality
 
 2. **Add More Features**
+
    - Shopping cart API
    - Order management
    - Image upload
@@ -406,13 +427,13 @@ Setelah starter project selesai:
 
 ---
 
-**Happy Coding! 🚀**
+**Happy Coding! **
 
-**Remember:** Practice makes perfect! Don't give up! 💪
+**Remember:** Practice makes perfect! Don't give up!
 
 ---
 
-**📁 Repository Info:**
+** Repository Info:**
 
 - **Name:** `health-ecommerce-external-integration/starter-project`
 - **Type:** Starter Template (untuk practice)

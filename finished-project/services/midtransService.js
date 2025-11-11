@@ -16,9 +16,15 @@ class MidtransService {
       : "https://app.sandbox.midtrans.com/snap/v1/transactions";
 
     if (!this.serverKey) {
-      console.warn("⚠️  MIDTRANS_SERVER_KEY not set. Payment features will not work.");
+      console.warn(
+        "  MIDTRANS_SERVER_KEY not set. Payment features will not work."
+      );
     } else {
-      console.log(`✅ Midtrans initialized (${this.isProduction ? 'Production' : 'Sandbox'})`);
+      console.log(
+        ` Midtrans initialized (${
+          this.isProduction ? "Production" : "Sandbox"
+        })`
+      );
     }
   }
 
@@ -28,21 +34,30 @@ class MidtransService {
         throw new Error("MIDTRANS_SERVER_KEY is not configured.");
       }
 
-      if (!orderData.orderId || !orderData.items || orderData.items.length === 0) {
+      if (
+        !orderData.orderId ||
+        !orderData.items ||
+        orderData.items.length === 0
+      ) {
         throw new Error("Missing required fields: orderId or items");
       }
 
       // Map and validate items
       const itemDetails = orderData.items.map((item, index) => {
-        const itemPrice = typeof item.price === 'number' ? item.price : parseInt(item.price) || 0;
+        const itemPrice =
+          typeof item.price === "number"
+            ? item.price
+            : parseInt(item.price) || 0;
         const itemQuantity = item.quantity || 1;
-        
+
         if (!item.name) {
           throw new Error(`Item at index ${index} is missing name`);
         }
-        
+
         if (itemPrice <= 0) {
-          throw new Error(`Item "${item.name}" has invalid price: ${item.price}`);
+          throw new Error(
+            `Item "${item.name}" has invalid price: ${item.price}`
+          );
         }
 
         return {
@@ -55,19 +70,21 @@ class MidtransService {
 
       // Calculate exact gross_amount from items (MUST match for Midtrans)
       const grossAmount = itemDetails.reduce((sum, item) => {
-        return sum + (item.price * item.quantity);
+        return sum + item.price * item.quantity;
       }, 0);
 
-      console.log(`💰 Calculated gross_amount: ${grossAmount} from ${itemDetails.length} items`);
+      console.log(
+        ` Calculated gross_amount: ${grossAmount} from ${itemDetails.length} items`
+      );
 
       if (grossAmount <= 0 || isNaN(grossAmount)) {
         throw new Error(`Invalid gross_amount: ${grossAmount}`);
       }
 
       // Determine callback URLs based on environment
-      const baseURL = this.isProduction 
-        ? process.env.FRONTEND_URL || 'https://yourdomain.com'
-        : 'http://localhost:3000';
+      const baseURL = this.isProduction
+        ? process.env.FRONTEND_URL || "https://yourdomain.com"
+        : "http://localhost:3000";
 
       const parameter = {
         transaction_details: {
@@ -89,7 +106,7 @@ class MidtransService {
 
       const authString = Buffer.from(`${this.serverKey}:`).toString("base64");
 
-      console.log('📤 Sending to Midtrans:', {
+      console.log(" Sending to Midtrans:", {
         orderId: parameter.transaction_details.order_id,
         grossAmount: parameter.transaction_details.gross_amount,
         grossAmountType: typeof parameter.transaction_details.gross_amount,
@@ -99,8 +116,8 @@ class MidtransService {
       const response = await axios.post(this.snapURL, parameter, {
         headers: {
           "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": `Basic ${authString}`,
+          Accept: "application/json",
+          Authorization: `Basic ${authString}`,
         },
         timeout: 30000,
       });
@@ -109,7 +126,7 @@ class MidtransService {
         throw new Error("Invalid response from Midtrans: missing token");
       }
 
-      console.log('✅ Payment created successfully');
+      console.log(" Payment created successfully");
 
       return {
         success: true,
@@ -120,7 +137,7 @@ class MidtransService {
     } catch (error) {
       if (error.response) {
         const errorData = error.response.data;
-        console.error("❌ Midtrans API Error:", {
+        console.error(" Midtrans API Error:", {
           status: error.response.status,
           errors: errorData.error_messages || errorData,
         });
@@ -139,7 +156,7 @@ class MidtransService {
         };
       }
 
-      console.error("❌ Midtrans Error:", error.message);
+      console.error(" Midtrans Error:", error.message);
       return {
         success: false,
         message: error.message || "Payment creation failed",
@@ -154,7 +171,7 @@ class MidtransService {
   }
 
   handleNotification(notification) {
-    console.log("📥 Webhook Notification:", {
+    console.log(" Webhook Notification:", {
       orderId: notification.order_id,
       status: notification.transaction_status,
       hasSignature: !!notification.signature_key,
@@ -170,29 +187,31 @@ class MidtransService {
       );
 
       if (hash !== notification.signature_key) {
-        console.warn("❌ Invalid signature");
+        console.warn(" Invalid signature");
         return {
           success: false,
           message: "Invalid signature",
         };
       }
-      console.log("✅ Signature verified");
+      console.log(" Signature verified");
     } else {
-      console.warn("⚠️  No signature - skipping verification (normal for sandbox)");
+      console.warn(
+        "  No signature - skipping verification (normal for sandbox)"
+      );
     }
 
     // Map status
     let orderStatus;
     switch (notification.transaction_status) {
-      case 'settlement':
-      case 'capture':
-        orderStatus = 'paid';
+      case "settlement":
+      case "capture":
+        orderStatus = "paid";
         break;
-      case 'pending':
-        orderStatus = 'pending';
+      case "pending":
+        orderStatus = "pending";
         break;
       default:
-        orderStatus = 'failed';
+        orderStatus = "failed";
     }
 
     return {

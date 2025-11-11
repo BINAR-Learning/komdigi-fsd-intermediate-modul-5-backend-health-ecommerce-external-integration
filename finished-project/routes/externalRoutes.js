@@ -215,13 +215,20 @@ router.post(
 router.post("/payment/create", authenticateToken, async (req, res) => {
   try {
     const userId = req.user.id;
-    const { orderId, items, amount, customerName, customerEmail, customerPhone } = req.body;
+    const {
+      orderId,
+      items,
+      amount,
+      customerName,
+      customerEmail,
+      customerPhone,
+    } = req.body;
 
     // Create order in database with status "pending"
     const orderData = {
       orderId: orderId,
       user: userId,
-      items: items.map(item => ({
+      items: items.map((item) => ({
         product: item.id || item._id,
         name: item.name,
         price: item.price,
@@ -247,7 +254,7 @@ router.post("/payment/create", authenticateToken, async (req, res) => {
         console.log("   Status:", order.status);
         console.log("   Total Amount:", order.totalAmount);
         console.log("   Items count:", order.items.length);
-        
+
         // Verify order was saved
         const verifyOrder = await Order.findOne({ orderId });
         if (verifyOrder) {
@@ -269,7 +276,7 @@ router.post("/payment/create", authenticateToken, async (req, res) => {
 
     // Create Midtrans transaction
     const result = await midtransService.createTransaction(req.body);
-    
+
     // If payment creation successful, return result
     if (result.success) {
       res.json(result);
@@ -326,11 +333,11 @@ router.post("/payment/webhook", async (req, res) => {
   try {
     console.log("Webhook received from Midtrans");
     console.log("Full webhook body:", JSON.stringify(req.body, null, 2));
-    
+
     const orderId = req.body.order_id;
     const transactionStatus = req.body.transaction_status;
     const statusCode = req.body.status_code;
-    
+
     console.log("Webhook details:", {
       orderId,
       transactionStatus,
@@ -342,40 +349,43 @@ router.post("/payment/webhook", async (req, res) => {
 
     // Process notification
     const result = midtransService.handleNotification(req.body);
-    console.log("📥 Midtrans service result:", result);
-    
+    console.log(" Midtrans service result:", result);
+
     // Find order in database - try multiple ways
     let order = await Order.findOne({ orderId });
-    
+
     // If not found, try searching by orderId without case sensitivity
     if (!order) {
-      order = await Order.findOne({ 
-        orderId: { $regex: new RegExp(`^${orderId}$`, 'i') } 
+      order = await Order.findOne({
+        orderId: { $regex: new RegExp(`^${orderId}$`, "i") },
       });
     }
-    
+
     // If still not found, log all orders for debugging
     if (!order) {
       console.warn("Order not found in database:", orderId);
       console.warn("   Searching for similar orderIds...");
-      
+
       // Find all recent orders for debugging
       const recentOrders = await Order.find()
         .sort({ createdAt: -1 })
         .limit(5)
-        .select('orderId status createdAt');
-      
-      console.warn("   Recent orders in database:", recentOrders.map(o => ({
-        orderId: o.orderId,
-        status: o.status,
-        createdAt: o.createdAt
-      })));
-      
+        .select("orderId status createdAt");
+
+      console.warn(
+        "   Recent orders in database:",
+        recentOrders.map((o) => ({
+          orderId: o.orderId,
+          status: o.status,
+          createdAt: o.createdAt,
+        }))
+      );
+
       console.warn("   This might happen if:");
       console.warn("   1. Order was not created during payment");
       console.warn("   2. OrderId mismatch between payment and webhook");
       console.warn("   3. Database connection issue");
-      
+
       // Still return success to Midtrans even if order not found
       // (to prevent Midtrans from retrying)
       return res.status(200).json({
@@ -384,8 +394,8 @@ router.post("/payment/webhook", async (req, res) => {
         orderId,
         debug: {
           searchedOrderId: orderId,
-          recentOrders: recentOrders.map(o => o.orderId)
-        }
+          recentOrders: recentOrders.map((o) => o.orderId),
+        },
       });
     }
 
@@ -395,23 +405,23 @@ router.post("/payment/webhook", async (req, res) => {
 
     // Map Midtrans transaction_status to order status
     let orderStatus = order.status; // Keep current status as default
-    
+
     switch (transactionStatus) {
-      case 'settlement':
-      case 'capture':
-        orderStatus = 'paid';
+      case "settlement":
+      case "capture":
+        orderStatus = "paid";
         break;
-      case 'pending':
-        orderStatus = 'pending';
+      case "pending":
+        orderStatus = "pending";
         break;
-      case 'deny':
-      case 'expire':
-      case 'cancel':
-        orderStatus = 'failed';
+      case "deny":
+      case "expire":
+      case "cancel":
+        orderStatus = "failed";
         break;
-      case 'refund':
-      case 'partial_refund':
-        orderStatus = 'cancelled';
+      case "refund":
+      case "partial_refund":
+        orderStatus = "cancelled";
         break;
       default:
         // Keep current status if unknown status
@@ -423,21 +433,26 @@ router.post("/payment/webhook", async (req, res) => {
     const previousStatus = order.status;
     order.status = orderStatus;
     order.transactionStatus = transactionStatus;
-    
+
     // Update midtransData
     order.midtransData = {
-      transactionId: req.body.transaction_id || order.midtransData?.transactionId,
+      transactionId:
+        req.body.transaction_id || order.midtransData?.transactionId,
       statusCode: statusCode || order.midtransData?.statusCode,
-      grossAmount: parseInt(req.body.gross_amount || order.midtransData?.grossAmount || order.totalAmount),
+      grossAmount: parseInt(
+        req.body.gross_amount ||
+          order.midtransData?.grossAmount ||
+          order.totalAmount
+      ),
       paymentType: req.body.payment_type || order.midtransData?.paymentType,
-      transactionTime: req.body.transaction_time 
-        ? new Date(req.body.transaction_time) 
-        : (order.midtransData?.transactionTime || new Date()),
-      settlementTime: req.body.settlement_time 
-        ? new Date(req.body.settlement_time) 
+      transactionTime: req.body.transaction_time
+        ? new Date(req.body.transaction_time)
+        : order.midtransData?.transactionTime || new Date(),
+      settlementTime: req.body.settlement_time
+        ? new Date(req.body.settlement_time)
         : order.midtransData?.settlementTime,
     };
-    
+
     // Save order with error handling
     try {
       await order.save();
@@ -446,13 +461,18 @@ router.post("/payment/webhook", async (req, res) => {
       console.log("   Previous status:", previousStatus);
       console.log("   New status:", orderStatus);
       console.log("   Transaction status:", transactionStatus);
-      
+
       // Verify the save worked
       const verifyOrder = await Order.findOne({ orderId });
       if (verifyOrder && verifyOrder.status === orderStatus) {
         console.log("Order status verified in database:", verifyOrder.status);
-        } else {
-        console.error("Order status NOT updated! Expected:", orderStatus, "Got:", verifyOrder?.status);
+      } else {
+        console.error(
+          "Order status NOT updated! Expected:",
+          orderStatus,
+          "Got:",
+          verifyOrder?.status
+        );
       }
     } catch (saveError) {
       console.error("Error saving order:", saveError);
@@ -461,24 +481,27 @@ router.post("/payment/webhook", async (req, res) => {
       console.error("   Error stack:", saveError.stack);
       throw saveError; // Re-throw to be caught by outer catch
     }
-    
+
     // Send email if payment successful
-    if (result.success && result.status === 'paid' && orderStatus === 'paid') {
+    if (result.success && result.status === "paid" && orderStatus === "paid") {
       console.log("Payment successful, sending confirmation email...");
-      
-      const customerEmail = req.body.customer_details?.email || 
-                           req.body.email || 
-                           order.customerDetails?.email ||
-                           'customer@example.com';
-      
+
+      const customerEmail =
+        req.body.customer_details?.email ||
+        req.body.email ||
+        order.customerDetails?.email ||
+        "customer@example.com";
+
       // Get order items for email
       const orderItems = order.items || [];
-      
+
       const emailResult = await emailService.sendPaymentConfirmation({
         orderId: result.orderId,
         customerEmail: customerEmail,
-        amount: parseInt(result.grossAmount || req.body.gross_amount || order.totalAmount),
-        items: orderItems.map(item => ({
+        amount: parseInt(
+          result.grossAmount || req.body.gross_amount || order.totalAmount
+        ),
+        items: orderItems.map((item) => ({
           name: item.name,
           price: item.price,
           quantity: item.quantity,
@@ -491,9 +514,15 @@ router.post("/payment/webhook", async (req, res) => {
         console.warn("Email sending failed:", emailResult.error);
       }
     } else {
-      console.log("Payment status:", result.status, "Order status:", orderStatus, "- No email sent");
+      console.log(
+        "Payment status:",
+        result.status,
+        "Order status:",
+        orderStatus,
+        "- No email sent"
+      );
     }
-    
+
     // Always return success to Midtrans (to prevent retries)
     res.status(200).json({
       success: true,
@@ -505,13 +534,13 @@ router.post("/payment/webhook", async (req, res) => {
   } catch (error) {
     console.error("Webhook error:", error);
     console.error("   Error stack:", error.stack);
-    
+
     // Still return 200 to Midtrans to prevent retries
     // But log the error for debugging
-    res.status(200).json({ 
-      success: false, 
+    res.status(200).json({
+      success: false,
       message: error.message,
-      error: process.env.NODE_ENV === 'development' ? error.stack : undefined,
+      error: process.env.NODE_ENV === "development" ? error.stack : undefined,
     });
   }
 });

@@ -44,8 +44,7 @@ async function seedVitamins() {
     },
     {
       name: "Vitamin A 5000 IU",
-      description:
-        "Mendukung kesehatan mata, kulit, dan sistem imun.",
+      description: "Mendukung kesehatan mata, kulit, dan sistem imun.",
       category: "Vitamin",
       price: 45000,
       stock: 110,
@@ -108,12 +107,11 @@ async function seedVitamins() {
     inserted += 1;
   }
 
-  console.log(`✅ Vitamin seeding completed. Inserted: ${inserted}`);
+  console.log(` Vitamin seeding completed. Inserted: ${inserted}`);
   process.exit(0);
 }
 
 seedVitamins().catch((err) => {
-  console.error("❌ Seeding error:", err.message);
+  console.error(" Seeding error:", err.message);
   process.exit(1);
 });
-

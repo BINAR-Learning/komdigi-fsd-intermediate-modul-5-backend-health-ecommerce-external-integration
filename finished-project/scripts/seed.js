@@ -8,7 +8,8 @@ const products = [
   // Vitamins
   {
     name: "Vitamin C 1000mg",
-    description: "Suplemen vitamin C untuk meningkatkan daya tahan tubuh dan antioksidan",
+    description:
+      "Suplemen vitamin C untuk meningkatkan daya tahan tubuh dan antioksidan",
     category: "Vitamin",
     price: 85000,
     stock: 50,
@@ -44,7 +45,8 @@ const products = [
   },
   {
     name: "Vitamin E 400 IU Natural",
-    description: "Vitamin E alami sebagai antioksidan untuk kesehatan kulit dan sel",
+    description:
+      "Vitamin E alami sebagai antioksidan untuk kesehatan kulit dan sel",
     category: "Vitamin",
     price: 69000,
     stock: 80,
@@ -62,7 +64,8 @@ const products = [
   },
   {
     name: "Vitamin K2 MK-7 100mcg",
-    description: "Bekerja sinergis dengan D3 untuk mineralisasi tulang dan kesehatan kardiovaskular",
+    description:
+      "Bekerja sinergis dengan D3 untuk mineralisasi tulang dan kesehatan kardiovaskular",
     category: "Vitamin",
     price: 99000,
     stock: 60,
@@ -71,7 +74,8 @@ const products = [
   },
   {
     name: "Vitamin B12 Methylcobalamin 1000mcg",
-    description: "Dukung pembentukan sel darah merah dan fungsi saraf, bentuk aktif",
+    description:
+      "Dukung pembentukan sel darah merah dan fungsi saraf, bentuk aktif",
     category: "Vitamin",
     price: 85000,
     stock: 75,
@@ -153,7 +157,8 @@ const products = [
   },
   {
     name: "Ashwagandha 600mg",
-    description: "Herbal adaptogen untuk mengurangi stres dan meningkatkan energi",
+    description:
+      "Herbal adaptogen untuk mengurangi stres dan meningkatkan energi",
     category: "Supplement",
     price: 195000,
     stock: 35,
@@ -464,68 +469,85 @@ const seedDatabase = async () => {
     // Connect to database
     await connectDB();
 
-    console.log("\n🗑️  Clearing old data...");
+    console.log("\n  Clearing old data...");
     await Product.deleteMany();
     await User.deleteMany();
-    console.log("✅ Old data cleared\n");
+    console.log(" Old data cleared\n");
 
     // Insert products
-    console.log("📦 Creating products...");
+    console.log(" Creating products...");
     const createdProducts = await Product.insertMany(products);
-    console.log(`✅ ${createdProducts.length} products created\n`);
+    console.log(` ${createdProducts.length} products created\n`);
 
     // Insert users - Use create() instead of insertMany() to trigger password hashing
-    console.log("👥 Creating users...");
+    console.log(" Creating users...");
     const createdUsers = [];
     for (const userData of users) {
       // User.create() will trigger pre-save hook to hash password automatically
       const user = await User.create(userData);
       createdUsers.push(user);
     }
-    console.log(`✅ ${createdUsers.length} users created (passwords encrypted)\n`);
+    console.log(
+      ` ${createdUsers.length} users created (passwords encrypted)\n`
+    );
 
     // Display sample IDs
-    console.log("📋 Sample Product IDs (for testing):");
+    console.log(" Sample Product IDs (for testing):");
     createdProducts.slice(0, 5).forEach((product) => {
       console.log(`   - ${product.name}: ${product._id}`);
     });
 
-    console.log("\n📋 Test Users for Login:");
-    console.log("\n   🔐 ADMIN USERS:");
+    console.log("\n Test Users for Login:");
+    console.log("\n    ADMIN USERS:");
     createdUsers
       .filter((u) => u.role === "admin")
       .forEach((user) => {
         const userData = users.find((u) => u.email === user.email);
-        console.log(`   - ${user.name} (${user.email}) / Password: ${userData.password} (hashed in DB)`);
+        console.log(
+          `   - ${user.name} (${user.email}) / Password: ${userData.password} (hashed in DB)`
+        );
       });
 
-    console.log("\n   👤 REGULAR USERS:");
+    console.log("\n    REGULAR USERS:");
     createdUsers
       .filter((u) => u.role === "user")
       .slice(0, 10)
       .forEach((user) => {
         const userData = users.find((u) => u.email === user.email);
-        console.log(`   - ${user.name} (${user.email}) / Password: ${userData.password} (hashed in DB)`);
+        console.log(
+          `   - ${user.name} (${user.email}) / Password: ${userData.password} (hashed in DB)`
+        );
       });
     if (createdUsers.filter((u) => u.role === "user").length > 10) {
-      console.log(`   ... and ${createdUsers.filter((u) => u.role === "user").length - 10} more users`);
+      console.log(
+        `   ... and ${
+          createdUsers.filter((u) => u.role === "user").length - 10
+        } more users`
+      );
     }
 
-    console.log(`\n📊 Summary:`);
-    console.log(`   ✅ ${createdProducts.length} products created`);
-    console.log(`   ✅ ${createdUsers.length} users created`);
-    console.log(`      - ${createdUsers.filter((u) => u.role === "admin").length} admin users`);
-    console.log(`      - ${createdUsers.filter((u) => u.role === "user").length} regular users`);
+    console.log(`\n Summary:`);
+    console.log(`    ${createdProducts.length} products created`);
+    console.log(`    ${createdUsers.length} users created`);
+    console.log(
+      `      - ${
+        createdUsers.filter((u) => u.role === "admin").length
+      } admin users`
+    );
+    console.log(
+      `      - ${
+        createdUsers.filter((u) => u.role === "user").length
+      } regular users`
+    );
 
-    console.log("\n🎉 Database seeding complete!");
-    console.log("🚀 You can now run: npm run dev\n");
+    console.log("\n Database seeding complete!");
+    console.log(" You can now run: npm run dev\n");
 
     process.exit(0);
   } catch (error) {
-    console.error("❌ Seeding error:", error);
+    console.error(" Seeding error:", error);
     process.exit(1);
   }
 };
 
 seedDatabase();
-

@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
     // Log token info in development for debugging
     if (process.env.NODE_ENV === "development") {
       const tokenParts = token.split(".");
-      console.log("✅ Token generated successfully:", {
+      console.log(" Token generated successfully:", {
         tokenLength: token.length,
         tokenParts: tokenParts.length,
         tokenPrefix: token.substring(0, 50) + "...",
@@ -105,7 +105,7 @@ exports.login = async (req, res) => {
     // Log token info in development for debugging
     if (process.env.NODE_ENV === "development") {
       const tokenParts = token.split(".");
-      console.log("✅ Token generated successfully:", {
+      console.log(" Token generated successfully:", {
         tokenLength: token.length,
         tokenParts: tokenParts.length,
         tokenPrefix: token.substring(0, 50) + "...",
@@ -180,15 +180,15 @@ exports.updateProfile = async (req, res) => {
 
     // Extract update data
     const updateData = { ...req.body };
-    
+
     // Handle image upload if file exists
     if (req.file) {
       // Delete old photo from Cloudinary if exists
-      if (user.profilePhoto && user.profilePhoto.includes('cloudinary')) {
+      if (user.profilePhoto && user.profilePhoto.includes("cloudinary")) {
         try {
-          const urlParts = user.profilePhoto.split('/');
+          const urlParts = user.profilePhoto.split("/");
           const publicIdWithExt = urlParts[urlParts.length - 1];
-          const publicId = publicIdWithExt.split('.')[0];
+          const publicId = publicIdWithExt.split(".")[0];
           const folderPath = `health-ecommerce/profiles/${publicId}`;
           await cloudinary.uploader.destroy(folderPath);
         } catch (err) {
@@ -206,7 +206,7 @@ exports.updateProfile = async (req, res) => {
     if (updateData.phone) user.phone = updateData.phone;
     if (updateData.address) user.address = updateData.address;
     if (updateData.profilePhoto) user.profilePhoto = updateData.profilePhoto;
-    
+
     await user.save();
 
     res.json({

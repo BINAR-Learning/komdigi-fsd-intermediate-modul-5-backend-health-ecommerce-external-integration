@@ -27,8 +27,8 @@ exports.getOrderHistory = async (req, res) => {
     // Get orders with pagination
     const orders = await Order.find(query)
       .populate({
-        path: 'items.product',
-        select: 'name price category imageUrl manufacturer'
+        path: "items.product",
+        select: "name price category imageUrl manufacturer",
       })
       .sort({ createdAt: -1 })
       .skip(skip)
@@ -47,7 +47,7 @@ exports.getOrderHistory = async (req, res) => {
       data: orders,
     });
   } catch (error) {
-    console.error("❌ Get order history error:", error);
+    console.error(" Get order history error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch order history",
@@ -69,8 +69,8 @@ exports.getOrderById = async (req, res) => {
       orderId: orderId,
       user: userId,
     }).populate({
-      path: 'items.product',
-      select: 'name price category imageUrl manufacturer description'
+      path: "items.product",
+      select: "name price category imageUrl manufacturer description",
     });
 
     if (!order) {
@@ -85,7 +85,7 @@ exports.getOrderById = async (req, res) => {
       data: order,
     });
   } catch (error) {
-    console.error("❌ Get order error:", error);
+    console.error(" Get order error:", error);
     res.status(500).json({
       success: false,
       message: "Failed to fetch order",
@@ -93,4 +93,3 @@ exports.getOrderById = async (req, res) => {
     });
   }
 };
-

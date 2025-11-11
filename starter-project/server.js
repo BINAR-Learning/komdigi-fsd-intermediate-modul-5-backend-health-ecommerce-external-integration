@@ -1,8 +1,8 @@
 /**
  * Health E-Commerce API - Server (Modul 5: External API Integration)
- * 
+ *
  * File ini adalah entry point utama aplikasi.
- * 
+ *
  * TODO untuk Peserta:
  * 1. Setup environment variables dengan dotenv
  * 2. Koneksi ke MongoDB
@@ -11,8 +11,8 @@
  * 5. Implement error handling
  */
 
-require('dotenv').config();
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 
 // TODO: Import middleware yang diperlukan
 // const helmet = require('helmet');
@@ -71,11 +71,11 @@ app.use(express.urlencoded({ extended: true }));
 // ==========================================
 // Health Check Endpoint
 // ==========================================
-app.get('/health', (req, res) => {
+app.get("/health", (req, res) => {
   res.json({
     success: true,
-    message: 'Server is running',
-    timestamp: new Date().toISOString()
+    message: "Server is running",
+    timestamp: new Date().toISOString(),
   });
 });
 
@@ -107,7 +107,7 @@ app.get('/health', (req, res) => {
 app.use((req, res) => {
   res.status(404).json({
     success: false,
-    message: 'Endpoint not found'
+    message: "Endpoint not found",
   });
 });
 
@@ -115,10 +115,9 @@ app.use((req, res) => {
 // Start Server
 // ==========================================
 app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
-  console.log(`📍 Health check: http://localhost:${PORT}/health`);
-  console.log(`💻 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(` Server running on port ${PORT}`);
+  console.log(` Health check: http://localhost:${PORT}/health`);
+  console.log(` Environment: ${process.env.NODE_ENV || "development"}`);
 });
 
 module.exports = app;
-

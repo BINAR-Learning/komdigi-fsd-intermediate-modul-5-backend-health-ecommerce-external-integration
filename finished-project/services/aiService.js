@@ -17,7 +17,7 @@ class AIService {
     this.CACHE_TTL = 60 * 60 * 1000; // 1 hour
 
     if (!this.apiKey) {
-      console.warn("⚠️  GOOGLE_AI_API_KEY not set. AI features will not work.");
+      console.warn("  GOOGLE_AI_API_KEY not set. AI features will not work.");
       this.genAI = null;
     } else {
       this.genAI = new GoogleGenerativeAI(this.apiKey);

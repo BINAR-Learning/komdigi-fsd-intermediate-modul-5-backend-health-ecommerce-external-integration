@@ -1,4 +1,4 @@
-# 🌐 health-ecommerce-external-integration
+# health-ecommerce-external-integration
 
 > **External API Integration & AI untuk Health E-Commerce Backend**
 
@@ -12,14 +12,14 @@ External API integration dengan Google Gemini AI, Kemenkes API, Midtrans payment
 
 ---
 
-## 📦 Apa yang Ada di Repository Ini?
+## Apa yang Ada di Repository Ini?
 
 Repository ini berisi **2 versi project**:
 
 ```
 health-ecommerce-external-integration/
 ├── README.md (Ini file yang kamu baca)
-├── starter-project/     # 📝 Untuk practice (dengan TODO)
+├── starter-project/     # Untuk practice (dengan TODO)
 │   ├── README.md
 │   ├── package.json
 │   ├── server.js (with TODOs)
@@ -29,7 +29,7 @@ health-ecommerce-external-integration/
 │   ├── models/
 │   ├── routes/
 │   └── services/ (ai, kemenkes, midtrans)
-└── finished-project/    # ✅ Complete implementation
+└── finished-project/    # Complete implementation
     ├── README.md
     ├── package.json
     ├── server.js (complete)
@@ -48,18 +48,18 @@ health-ecommerce-external-integration/
 
 ---
 
-## 🎯 Apa yang Akan Kamu Pelajari?
+## Apa yang Akan Kamu Pelajari?
 
 **Modul 5** melanjutkan dari Modul 4 (Security) dengan menambahkan external integrations!
 
 ### Konsep yang Dipelajari:
 
-- ✅ **External API Integration** - Consume third-party REST APIs
-- ✅ **AI Integration** - Google Gemini untuk intelligent chatbot
-- ✅ **Payment Gateway** - Midtrans untuk secure payments
-- ✅ **Webhooks** - Handle async event notifications
-- ✅ **Error Handling** - Retry mechanisms & fallbacks
-- ✅ **Rate Limiting** - Prevent API abuse
+- **External API Integration** - Consume third-party REST APIs
+- **AI Integration** - Google Gemini untuk intelligent chatbot
+- **Payment Gateway** - Midtrans untuk secure payments
+- **Webhooks** - Handle async event notifications
+- **Error Handling** - Retry mechanisms & fallbacks
+- **Rate Limiting** - Prevent API abuse
 
 ### Apa yang Dibangun:
 
@@ -69,11 +69,11 @@ health-ecommerce-external-integration/
 - **Email Notifications** - Order confirmations
 - **Webhook Handlers** - Event-driven architecture
 
-**Output:** Production-ready integrated backend with AI & payments! 🎉
+**Output:** Production-ready integrated backend with AI & payments!
 
 ---
 
-## 🔧 Prerequisites
+## Prerequisites
 
 - **Node.js** (v18+)
 - **MongoDB** (lokal atau Atlas)
@@ -83,7 +83,7 @@ health-ecommerce-external-integration/
 
 ---
 
-## 🚀 Quick Start (Untuk Newbie)
+## Quick Start (Untuk Newbie)
 
 ### Option 1: Practice dengan Starter Project
 
@@ -145,7 +145,7 @@ cp .env.example .env
 # 7. Start server
 npm run dev
 
-# API complete dengan AI, payment, dan webhook ready! ✅
+# API complete dengan AI, payment, dan webhook ready!
 ```
 
 ### Contoh konfigurasi `.env`
@@ -164,25 +164,25 @@ MIDTRANS_SERVER_KEY=your_midtrans_server_key
 
 ---
 
-## 📁 Struktur Starter Project
+## Struktur Starter Project
 
 ```
 starter-project/
 ├── README.md              # Setup guide
 ├── package.json           # Dependencies
-├── server.js             # ⚠️ TODO: Server setup
+├── server.js             # TODO: Server setup
 ├── config/
-│   └── database.js       # ✅ MongoDB connection (ready!)
+│   └── database.js       # MongoDB connection (ready!)
 ├── controllers/
-│   └── aiController.js    # ⚠️ TODO: AI endpoints
+│   └── aiController.js    # TODO: AI endpoints
 ├── middleware/
-│   ├── auth.js           # ✅ JWT verification (ready!)
-│   └── authorize.js      # ✅ RBAC middleware (ready!)
+│   ├── auth.js           # JWT verification (ready!)
+│   └── authorize.js      # RBAC middleware (ready!)
 ├── models/
-│   └── Product.js        # ✅ Product schema (ready!)
+│   └── Product.js        # Product schema (ready!)
 ├── routes/
-│   └── externalRoutes.js # ⚠️ TODO: External API routes
-└── services/             # ⚠️ TODO: External integrations
+│   └── externalRoutes.js # TODO: External API routes
+└── services/             # TODO: External integrations
     ├── aiService.js       # Gemini AI integration
     ├── kemenkesService.js # Kemenkes API
     └── midtransService.js # Payment gateway
@@ -199,25 +199,25 @@ starter-project/
 
 ---
 
-## 📁 Struktur Finished Project
+## Struktur Finished Project
 
 ```
 finished-project/
 ├── README.md              # Setup + explanations
 ├── package.json           # Dependencies
-├── server.js             # ✅ Complete integrated server
+├── server.js             # Complete integrated server
 ├── config/
-│   └── database.js       # ✅ MongoDB connection
+│   └── database.js       # MongoDB connection
 ├── controllers/
-│   └── aiController.js    # ✅ All AI endpoints
+│   └── aiController.js    # All AI endpoints
 ├── middleware/
-│   ├── auth.js           # ✅ JWT verification
-│   └── authorize.js      # ✅ RBAC middleware
+│   ├── auth.js           # JWT verification
+│   └── authorize.js      # RBAC middleware
 ├── models/
-│   └── Product.js        # ✅ Product schema
+│   └── Product.js        # Product schema
 ├── routes/
-│   └── externalRoutes.js # ✅ External API routes mounted
-└── services/             # ✅ All integrations complete
+│   └── externalRoutes.js # External API routes mounted
+└── services/             # All integrations complete
     ├── aiService.js       # Gemini AI working
     ├── kemenkesService.js # Kemenkes API functional
     └── midtransService.js # Payment gateway integrated
@@ -225,15 +225,15 @@ finished-project/
 
 **All implemented:**
 
-- ✅ Google Gemini AI chatbot working
-- ✅ Kemenkes API sync functional
-- ✅ Midtrans payment sandbox integrated
-- ✅ Webhook handlers implemented
-- ✅ Retry mechanisms for failed calls
-- ✅ Rate limiting configured
-- ✅ Error handling comprehensive
+- Google Gemini AI chatbot working
+- Kemenkes API sync functional
+- Midtrans payment sandbox integrated
+- Webhook handlers implemented
+- Retry mechanisms for failed calls
+- Rate limiting configured
+- Error handling comprehensive
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Error: "Invalid Google API Key"
 
@@ -269,7 +269,7 @@ finished-project/
 
 ---
 
-## 🧪 Testing External Integrations
+## Testing External Integrations
 
 ### Test AI Chatbot
 
@@ -304,48 +304,48 @@ curl -X POST http://localhost:3000/api/payments/create \
 
 ---
 
-## 🔗 Hubungan dengan Modul Lain
+## Hubungan dengan Modul Lain
 
 **Dari Modul 1 (OOP):**
 
-- ✅ Service layer patterns
-- ✅ Async/await untuk external API calls
+- Service layer patterns
+- Async/await untuk external API calls
 
 **Dari Modul 2 (Database):**
 
-- ✅ Product model untuk AI recommendations
-- ✅ Database untuk cache external data
+- Product model untuk AI recommendations
+- Database untuk cache external data
 
 **Dari Modul 3 (Express API):**
 
-- ✅ Routes structure
-- ✅ Middleware chain
-- ✅ Controllers pattern
+- Routes structure
+- Middleware chain
+- Controllers pattern
 
 **Dari Modul 4 (Security):**
 
-- ✅ JWT authentication
-- ✅ Protected API endpoints
-- ✅ Secure API key management
+- JWT authentication
+- Protected API endpoints
+- Secure API key management
 
-**Modul 5 (This!)** → Adds External Integrations
+**Modul 5 (This!)** - Adds External Integrations
 
-- 🆕 Google Gemini AI chatbot
-- 🆕 Payment gateway (Midtrans)
-- 🆕 External data APIs (Kemenkes)
-- 🆕 Webhook handling
-- 🆕 Email notifications
+- Google Gemini AI chatbot
+- Payment gateway (Midtrans)
+- External data APIs (Kemenkes)
+- Webhook handling
+- Email notifications
 
 **Ke Frontend (Next!):**
 
-- → Complete backend dengan AI & payments
-- → Production-ready API untuk React frontend
+- Complete backend dengan AI & payments
+- Production-ready API untuk React frontend
 
 **One Health E-Commerce system, built progressively!**
 
 ---
 
-## 💡 Tips Sukses
+## Tips Sukses
 
 1. **Start dengan starter-project** - Practice makes perfect!
 2. **Setup API keys early** - Get Gemini & Midtrans sandbox keys ready
@@ -358,7 +358,7 @@ curl -X POST http://localhost:3000/api/payments/create \
 
 ---
 
-## 📚 Resources
+## Resources
 
 **Documentation:**
 
@@ -376,9 +376,9 @@ curl -X POST http://localhost:3000/api/payments/create \
 
 ---
 
-## 🧾 Penutup / Summary – External API Integration
+## Penutup / Summary – External API Integration
 
-### 🧩 Ringkasan Poin Utama
+### Ringkasan Poin Utama
 
 Modul 5 mengintegrasikan Health E-Commerce dengan external services real-world, mencakup Google Gemini AI, Kemenkes API, Midtrans payment, dan webhook handling.
 
@@ -390,7 +390,7 @@ Peserta kini mampu:
 - Handle async events dengan webhooks
 - Build production-ready integrated systems
 
-### 🎯 Kaitan dengan Tujuan Pembelajaran
+### Kaitan dengan Tujuan Pembelajaran
 
 | Tujuan          | Pencapaian                                                 |
 | --------------- | ---------------------------------------------------------- |
@@ -399,7 +399,7 @@ Peserta kini mampu:
 | Payment Gateway | Midtrans sandbox implementation dengan webhook             |
 | Error Handling  | Retry mechanisms, fallbacks, comprehensive logging         |
 
-### 💭 Refleksi Akhir
+### Refleksi Akhir
 
 **"Bagaimana AI chatbot dapat meningkatkan user experience di Health E-Commerce?"**
 
@@ -407,7 +407,7 @@ Peserta kini mampu:
 
 **"Kapan sebaiknya menggunakan synchronous vs asynchronous patterns untuk external API calls?"**
 
-### 📘 Glosarium
+### Glosarium
 
 | Istilah          | Definisi                                   |
 | ---------------- | ------------------------------------------ |
@@ -418,7 +418,7 @@ Peserta kini mampu:
 | **Retry Logic**  | Automatic retry untuk failed operations    |
 | **Sandbox**      | Test environment untuk payment APIs        |
 
-### 💬 Kalimat Penutup
+### Kalimat Penutup
 
 Dengan menyelesaikan modul ini, peserta telah memahami **external API integration fundamentals**.
 
@@ -426,25 +426,25 @@ Selanjutnya, peserta akan mempelajari **Frontend Development dengan React** untu
 
 ---
 
-**Happy Integrating! 🌐🤖💳**
+**Happy Integrating!**
 
 _Disusun oleh Pusbang Talenta Digital_
 
 ---
 
-## 🚀 Next Steps
+## Next Steps
 
 After completing this module:
 
-1. ✅ **Test all external endpoints** dengan Postman
-2. ✅ **Verify AI chatbot** returns proper recommendations
-3. ✅ **Test payment flow** di Midtrans sandbox
-4. ✅ **Monitor webhook** handling untuk payment events
-5. ➡️ **Frontend Track** - React development dengan backend integration
+1. **Test all external endpoints** dengan Postman
+2. **Verify AI chatbot** returns proper recommendations
+3. **Test payment flow** di Midtrans sandbox
+4. **Monitor webhook** handling untuk payment events
+5. **Frontend Track** - React development dengan backend integration
 
 ---
 
-**Happy Coding! 🌐🤖💳**
+**Happy Coding!**
 
 _Part of Health E-Commerce Backend Series_  
 _Modul 5 - External API Integration & AI_

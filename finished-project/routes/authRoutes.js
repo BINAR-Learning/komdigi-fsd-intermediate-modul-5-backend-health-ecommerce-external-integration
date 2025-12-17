@@ -43,7 +43,7 @@ const uploadProfile = multer({
  *           schema:
  *             $ref: '#/components/schemas/UserRegister'
  *           example:
- *             name: "John Doe"
+ *             name: "Aiman"
  *             email: "john@example.com"
  *             password: "Password123!"
  *             role: "user"

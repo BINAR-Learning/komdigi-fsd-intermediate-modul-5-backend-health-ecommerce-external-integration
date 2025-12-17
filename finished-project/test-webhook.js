@@ -19,7 +19,7 @@ async function testWebhook() {
     transaction_id: "test-" + Date.now(),
     customer_details: {
       email: process.env.TEST_EMAIL || "customer@example.com",
-      first_name: "Test Customer",
+      first_name: "Aiman",
     },
     // signature_key not included (sandbox testing)
   };

@@ -81,7 +81,7 @@ SMTP_FROM="Health E-Commerce" <noreply@yourdomain.com>
 
 ## **Environment Variables:**
 
-Add to your `health-ecommerce-external-integration/finished-project/.env`:
+Add to your `komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration/finished-project/.env`:
 
 ```env
 # Email Service (SMTP)

@@ -33,8 +33,8 @@ async function testWebhook() {
     currency: "IDR",
     settlement_time: new Date().toISOString(),
     customer_details: {
-      first_name: "Test",
-      last_name: "User",
+      first_name: "Aiman",
+      last_name: "Rahman",
       email: "test@example.com",
       phone: "08123456789",
       billing_address: {

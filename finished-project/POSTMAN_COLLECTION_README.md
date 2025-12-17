@@ -89,8 +89,8 @@ Authorization: Bearer <your-jwt-token>
 
 ```json
 {
-  "name": "John Doe",
-  "email": "john.doe@example.com",
+  "name": "Aiman",
+  "email": "aiman@example.com",
   "password": "Password123!",
   "role": "user",
   "phone": "081234567890",
@@ -119,7 +119,7 @@ Authorization: Bearer <your-jwt-token>
 {
   "orderId": "ORDER-1234567890",
   "customerEmail": "customer@example.com",
-  "customerName": "John Doe",
+  "customerName": "Aiman",
   "amount": 170000,
   "items": [
     {
@@ -149,7 +149,7 @@ Collection ini dilengkapi dengan **Test Scripts** yang otomatis menyimpan token 
 | `authToken`  | JWT token untuk user  | Auto-filled setelah login       |
 | `adminToken` | JWT token untuk admin | Auto-filled setelah login admin |
 | `userId`     | User ID               | Auto-filled setelah login       |
-| `userEmail`  | User email            | `john.doe@example.com`          |
+| `userEmail`  | User email            | `aiman@example.com`          |
 | `userRole`   | User role             | Auto-filled setelah login       |
 
 ## Tips

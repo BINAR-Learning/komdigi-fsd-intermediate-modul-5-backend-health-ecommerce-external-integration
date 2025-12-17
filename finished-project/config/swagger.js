@@ -183,7 +183,7 @@ const options = {
             name: {
               type: "string",
               maxLength: 50,
-              example: "John Doe",
+              example: "Aiman",
             },
             email: {
               type: "string",
@@ -224,7 +224,7 @@ const options = {
             name: {
               type: "string",
               maxLength: 50,
-              example: "John Doe",
+              example: "Aiman",
             },
             email: {
               type: "string",
@@ -359,7 +359,7 @@ const options = {
             },
             customerName: {
               type: "string",
-              example: "John Doe",
+              example: "Aiman",
             },
             items: {
               type: "array",

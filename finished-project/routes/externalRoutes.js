@@ -194,7 +194,7 @@ router.post(
  *           example:
  *             orderId: "ORDER-1234567890"
  *             customerEmail: "customer@example.com"
- *             customerName: "John Doe"
+ *             customerName: "Aiman"
  *             items:
  *               - id: "69058b83cc8332efdabe01e2"
  *                 name: "Vitamin C 1000mg"

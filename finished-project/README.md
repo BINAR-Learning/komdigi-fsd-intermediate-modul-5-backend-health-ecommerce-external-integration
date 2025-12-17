@@ -5,7 +5,7 @@
 
 [![Node.js](https://img.shields.io/badge/Node.js-18+-green)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-4.18-blue)](https://expressjs.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-brightgreen)](https://www.mongodb.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-8.0+-brightgreen)](https://www.mongodb.com/)
 [![AI](https://img.shields.io/badge/Google-Gemini_AI-orange)](https://ai.google.dev/)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
@@ -103,16 +103,30 @@ SMTP_USER=your-email@gmail.com
 SMTP_PASS=your-app-password
 ```
 
-### Step 3: Start MongoDB
+### Step 3: Pastikan MongoDB Running
+
+**CATATAN PENTING:** Tidak perlu menjalankan `mongod` atau command start MongoDB jika tidak jalan di localmu. Pastikan saja MongoDB jalan dengan caramu, misalnya:
+
+- **Membuka MongoDB Compass** dan akses database yang kamu tuju (misalnya local db mu)
+- Jika MongoDB Compass sudah bisa connect ke `mongodb://localhost:27017`, berarti MongoDB sudah jalan
+- Atau jika pakai MongoDB Atlas, pastikan cluster sudah active
+- Intinya: **Pastikan MongoDB bisa diakses sesuai MONGODB_URI yang kamu set di .env**
+
+**Cara cek MongoDB sudah jalan:**
 
 ```bash
-# Check apakah MongoDB running
+# Option 1: Test dengan MongoDB Compass
+# Buka MongoDB Compass → Connect ke mongodb://localhost:27017
+# Jika berhasil connect = MongoDB sudah running
+
+# Option 2: Test dengan mongosh
 mongosh
 
-# Jika belum, start MongoDB:
+# Option 3: Jika belum jalan, kamu bisa start dengan cara:
 # Windows: Services → Start "MongoDB Server"
 # Mac: brew services start mongodb-community
 # Linux: sudo systemctl start mongod
+# TAPI ingat: Tidak wajib! Yang penting MongoDB bisa diakses dengan caramu sendiri.
 ```
 
 ### Step 4: Seed Database
@@ -470,7 +484,7 @@ curl http://localhost:5000/health
 # Register
 curl -X POST http://localhost:5000/api/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"name":"Test User","email":"test@example.com","password":"Test123!","phone":"08123456789"}'
+  -d '{"name":"Aiman","email":"aiman@example.com","password":"Aiman123!","phone":"08123456789"}'
 
 # Login
 curl -X POST http://localhost:5000/api/auth/login \
@@ -510,14 +524,29 @@ node test-email-direct.js
 ###  "MongoDB connection failed"
 
 **Solution:**
+
+**CATATAN PENTING:** Tidak perlu menjalankan `mongod` jika tidak jalan di localmu. Pastikan saja MongoDB jalan dengan caramu, misalnya:
+
+- **Membuka MongoDB Compass** dan akses database yang kamu tuju (misalnya local db mu)
+- Jika MongoDB Compass sudah bisa connect ke `mongodb://localhost:27017`, berarti MongoDB sudah jalan
+- Atau jika pakai MongoDB Atlas, pastikan cluster sudah active
+- Intinya: **Pastikan MongoDB bisa diakses sesuai MONGODB_URI yang kamu set di .env**
+
+**Cara cek MongoDB sudah jalan:**
+
 ```bash
-# Check MongoDB running
+# Option 1: Test dengan MongoDB Compass
+# Buka MongoDB Compass → Connect ke mongodb://localhost:27017
+# Jika berhasil connect = MongoDB sudah running
+
+# Option 2: Test dengan mongosh
 mongosh
 
-# Start MongoDB:
+# Option 3: Jika belum jalan, kamu bisa start dengan cara:
 # Windows: Services → MongoDB
 # Mac: brew services start mongodb-community
 # Linux: sudo systemctl start mongod
+# TAPI ingat: Tidak wajib! Yang penting MongoDB bisa diakses dengan caramu sendiri.
 ```
 
 ###  "GOOGLE_AI_API_KEY not set"
@@ -630,9 +659,9 @@ Kamu sekarang punya **complete production-ready backend** dengan:
 
 **Repository Info:**
 
-- **Name:** `health-ecommerce-external-integration/finished-project`
+- **Name:** `komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration/finished-project`
 - **Type:** Finished/Reference Implementation
-- **Starter Version:** `health-ecommerce-external-integration/starter-project`
+- **Starter Version:** `komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration/starter-project`
 
 **Happy Coding!**
 

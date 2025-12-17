@@ -1,10 +1,10 @@
-# health-ecommerce-external-integration
+# komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration
 
 > **External API Integration & AI untuk Health E-Commerce Backend**
 
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-4.18-blue)](https://expressjs.com/)
-[![MongoDB](https://img.shields.io/badge/MongoDB-7.0-brightgreen)](https://www.mongodb.com/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-8.0+-brightgreen)](https://www.mongodb.com/)
 [![AI](https://img.shields.io/badge/AI-Google_Gemini-orange)](https://ai.google.dev/)
 [![License](https://img.shields.io/badge/License-MIT-yellow)](LICENSE)
 
@@ -17,7 +17,7 @@ External API integration dengan Google Gemini AI, Kemenkes API, Midtrans payment
 Repository ini berisi **2 versi project**:
 
 ```
-health-ecommerce-external-integration/
+komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration/
 ├── README.md (Ini file yang kamu baca)
 ├── starter-project/     # Untuk practice (dengan TODO)
 │   ├── README.md
@@ -75,7 +75,7 @@ health-ecommerce-external-integration/
 
 ## Prerequisites
 
-- **Node.js** (v18+)
+- **Node.js** (v20+)
 - **MongoDB** (lokal atau Atlas)
 - **Postman** untuk testing
 - **API Keys** untuk Gemini AI & Midtrans (sandbox OK)
@@ -89,10 +89,10 @@ health-ecommerce-external-integration/
 
 ```bash
 # 1. Clone repository ini
-git clone https://github.com/your-username/health-ecommerce-external-integration.git
+git clone https://github.com/your-username/komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration.git
 
 # 2. Masuk ke folder repository
-cd health-ecommerce-external-integration
+cd komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration
 
 # 3. Masuk ke starter-project
 cd starter-project
@@ -107,10 +107,13 @@ cp .env.example .env
 # 6. Edit .env dengan text editor
 # Set MONGODB_URI, JWT_SECRET, dan API keys
 
-# 7. Start MongoDB
-# Windows: net start MongoDB
-# Mac: brew services start mongodb-community
-# Linux: sudo systemctl start mongod
+# 7. Pastikan MongoDB Running
+# CATATAN PENTING: Tidak perlu menjalankan `mongod` jika tidak jalan di localmu.
+# Pastikan saja MongoDB jalan dengan caramu, misalnya:
+# - Membuka MongoDB Compass dan akses database yang kamu tuju (misalnya local db mu)
+# - Atau jika MongoDB Compass sudah bisa connect ke mongodb://localhost:27017, berarti MongoDB sudah jalan
+# - Atau jika pakai MongoDB Atlas, pastikan cluster sudah active
+# Intinya: Pastikan MongoDB bisa diakses sesuai MONGODB_URI yang kamu set di .env
 
 # 8. Start server
 npm run dev
@@ -122,10 +125,10 @@ npm run dev
 
 ```bash
 # 1. Clone repository (jika belum)
-git clone https://github.com/your-username/health-ecommerce-external-integration.git
+git clone https://github.com/your-username/komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration.git
 
 # 2. Masuk ke folder repository
-cd health-ecommerce-external-integration
+cd komdigi-fsd-intermediate-modul-5-backend-health-ecommerce-external-integration
 
 # 3. Masuk ke finished-project
 cd finished-project

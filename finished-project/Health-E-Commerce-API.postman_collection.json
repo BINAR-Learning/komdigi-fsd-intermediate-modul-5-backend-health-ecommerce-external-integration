@@ -41,7 +41,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"password\": \"Password123!\",\n  \"role\": \"user\",\n  \"phone\": \"081234567890\",\n  \"address\": \"Jl. Merdeka No. 123, Jakarta\"\n}"
+							"raw": "{\n  \"name\": \"Aiman\",\n  \"email\": \"aiman@example.com\",\n  \"password\": \"Aiman123!\",\n  \"role\": \"user\",\n  \"phone\": \"081234567890\",\n  \"address\": \"Jl. Merdeka No. 123, Jakarta\"\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/auth/register",
@@ -207,7 +207,7 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "John Doe Updated",
+									"value": "Aiman Rahman",
 									"type": "text"
 								},
 								{
@@ -653,7 +653,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"orderId\": \"ORDER-{{$timestamp}}\",\n  \"customerEmail\": \"{{userEmail}}\",\n  \"customerName\": \"John Doe\",\n  \"amount\": 170000,\n  \"items\": [\n    {\n      \"id\": \"69058b83cc8332efdabe01e2\",\n      \"name\": \"Vitamin C 1000mg\",\n      \"price\": 85000,\n      \"quantity\": 2\n    }\n  ]\n}"
+							"raw": "{\n  \"orderId\": \"ORDER-{{$timestamp}}\",\n  \"customerEmail\": \"{{userEmail}}\",\n  \"customerName\": \"Aiman\",\n  \"amount\": 170000,\n  \"items\": [\n    {\n      \"id\": \"69058b83cc8332efdabe01e2\",\n      \"name\": \"Vitamin C 1000mg\",\n      \"price\": 85000,\n      \"quantity\": 2\n    }\n  ]\n}"
 						},
 						"url": {
 							"raw": "{{baseUrl}}/api/external/payment/create",
@@ -897,7 +897,7 @@
 		},
 		{
 			"key": "userEmail",
-			"value": "john.doe@example.com",
+			"value": "aiman@example.com",
 			"type": "string"
 		},
 		{

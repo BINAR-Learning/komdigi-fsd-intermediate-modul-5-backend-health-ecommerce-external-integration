@@ -3,7 +3,7 @@
 > **THE COMPLETE BACKEND - Production-Ready dengan ALL Features dari Modul 1-6**  
 > **Use this for ALL Frontend & Common Modules!**
 
-[![Node.js](https://img.shields.io/badge/Node.js-18+-green)](https://nodejs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-20+-green)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-4.18-blue)](https://expressjs.com/)
 [![MongoDB](https://img.shields.io/badge/MongoDB-8.0+-brightgreen)](https://www.mongodb.com/)
 [![AI](https://img.shields.io/badge/Google-Gemini_AI-orange)](https://ai.google.dev/)
